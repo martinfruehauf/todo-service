@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import javax.json.Json;
 import javax.json.JsonArray;
+import javax.json.JsonBuilderFactory;
 import javax.ws.rs.core.Response;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -20,7 +21,8 @@ public class TodoResourceTest {
 
   @Test
     public void testGetName(){
-        JsonArray jsonResponse = Json.createArrayBuilder()
+    JsonBuilderFactory factory = Json.createBuilderFactory(null);
+        JsonArray jsonResponse = factory.createArrayBuilder()
                 .add(Json.createObjectBuilder().add("name", "Max"))
                 .add(Json.createObjectBuilder().add("name", "Christian"))
                 .add(Json.createObjectBuilder().add("name", "Martin")).build();
