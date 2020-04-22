@@ -14,7 +14,6 @@ import java.util.List;
 @Produces(MediaType.APPLICATION_JSON)
 public class TodoResource {
 
-  // The java method will produce HTTP GET requests
   @GET
   public Response getNames() {
     List<Name> list = new ArrayList<>();
