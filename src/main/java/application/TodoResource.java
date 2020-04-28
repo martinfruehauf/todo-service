@@ -1,25 +1,32 @@
 package application;
 
-import domain.Name;
+import domain.Todo;
+import domain.TodoService;
 
+import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.ArrayList;
 import java.util.List;
 
 @Path("/todos")
 @Produces(MediaType.APPLICATION_JSON)
 public class TodoResource {
+  @Inject
+  private TodoService todoService;
+
+  public TodoResource() {
+  }
+
+  public TodoResource(final TodoService todoService) {
+    this.todoService = todoService;
+  }
 
   @GET
-  public Response getNames() {
-    List<Name> list = new ArrayList<>();
-    list.add(new Name("Max"));
-    list.add(new Name("Christian"));
-    list.add(new Name("Martin"));
+  public Response getTodos() {
+    List<Todo> list = todoService.listTodo();
     return Response.ok().entity(list).build();
   }
 
