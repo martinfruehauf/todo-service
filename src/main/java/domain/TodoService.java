@@ -1,19 +1,29 @@
 package domain;
 
+import java.time.LocalDateTime;
+import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
 
 public class TodoService {
-    List<Name> list;
+    List<Name> nameList;
+    List<Todo> todoList;
     public TodoService(){
         System.out.println("TodoService injiziert");
     }
 
     public List<Name> listNames(){
-        list = new ArrayList<>();
-        list.add(new Name("Max"));
-        list.add(new Name("Christian"));
-        list.add(new Name("Martin"));
-        return list;
+        nameList = new ArrayList<>();
+        nameList.add(new Name("Max"));
+        nameList.add(new Name("Christian"));
+        nameList.add(new Name("Martin"));
+        return nameList;
+    }
+
+    public List<Todo> listTodo(){
+        todoList = new ArrayList<>();
+        todoList.add(new Todo(1, "Bla", "Do the bla", true, LocalDateTime.of(2020, Month.JANUARY, 10, 7, 30)));
+        todoList.add(new Todo(2, "Blubb", "Do the blubb", false, LocalDateTime.of(2020, Month.FEBRUARY, 20, 10, 00)));
+        return todoList;
     }
 }
