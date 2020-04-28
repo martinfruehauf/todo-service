@@ -1,6 +1,7 @@
 package domain;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 public class Todo {
   private long id;
@@ -60,4 +61,28 @@ public class Todo {
   public void setDueDate(LocalDateTime dueDate) {
     this.dueDate = dueDate;
   }
+
+  @Override
+  public String toString() {
+    return "Todo{" +
+            "id=" + id +
+            ", name='" + name + '\'' +
+            ", description='" + description + '\'' +
+            ", status=" + status +
+            ", dueDate=" + dueDate +
+            '}';
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    Todo todo = (Todo) o;
+    return id == todo.id &&
+            status == todo.status &&
+            Objects.equals(name, todo.name) &&
+            Objects.equals(description, todo.description) &&
+            Objects.equals(dueDate, todo.dueDate);
+  }
+
 }

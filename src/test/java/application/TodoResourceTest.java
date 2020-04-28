@@ -1,7 +1,7 @@
 package application;
 
-import domain.Name;
 import domain.Todo;
+import domain.TodoService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -18,20 +18,7 @@ public class TodoResourceTest {
 
   @BeforeEach
   public void setUp() {
-    this.todoResource = new TodoResource();
-  }
-
-  @Test
-  public void testGetName() {
-    ArrayList<Name> want = new ArrayList<>();
-
-    want.add(new Name("Max"));
-    want.add(new Name("Christian"));
-    want.add(new Name("Martin"));
-
-    Response names = this.todoResource.getNames();
-
-    assertEquals(want, names.getEntity());
+    this.todoResource = new TodoResource(new TodoService());
   }
 
   @Test

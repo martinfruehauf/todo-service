@@ -1,6 +1,5 @@
 package application;
 
-import domain.Name;
 import domain.Todo;
 import domain.TodoService;
 
@@ -18,11 +17,8 @@ public class TodoResource {
   @Inject
   TodoService todoService;
 
-  @GET
-  @Path("/names")
-  public Response getNames() {
-    List<Name> list = todoService.listNames();
-    return Response.ok().entity(list).build();
+  public TodoResource(final TodoService todoService) {
+    this.todoService = todoService;
   }
 
   @GET

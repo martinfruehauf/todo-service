@@ -6,20 +6,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TodoService {
-  List<Name> nameList;
 
   List<Todo> todoList;
 
   public TodoService() {
     System.out.println("TodoService injiziert");
-  }
-
-  public List<Name> listNames() {
-    nameList = new ArrayList<>();
-    nameList.add(new Name("Max"));
-    nameList.add(new Name("Christian"));
-    nameList.add(new Name("Martin"));
-    return nameList;
   }
 
   public List<Todo> listTodo() {
