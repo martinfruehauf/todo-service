@@ -16,12 +16,12 @@ public class TodoService {
 
   public TodoService() {
     LOG.info("TodoService injiziert");
-  }
-
-  public List<Todo> listTodo() {
     todoList = new ArrayList<>();
     todoList.add(new Todo(1, "Bla", "Do the bla", true, LocalDateTime.of(2020, Month.JANUARY, 10, 7, 30)));
     todoList.add(new Todo(2, "Blubb", "Do the blubb", false, LocalDateTime.of(2020, Month.FEBRUARY, 20, 10, 00)));
+  }
+
+  public List<Todo> listTodo() {
     return todoList;
   }
 }
