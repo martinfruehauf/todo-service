@@ -7,7 +7,7 @@ import java.util.List;
 
 public class TodoService {
 
-  List<Todo> todoList;
+  private List<Todo> todoList;
 
   public TodoService() {
     System.out.println("TodoService injiziert");

@@ -26,7 +26,7 @@ public class Todo {
     return id;
   }
 
-  public void setId(long id) {
+  public void setId(final long id) {
     this.id = id;
   }
 
@@ -34,7 +34,7 @@ public class Todo {
     return name;
   }
 
-  public void setName(String name) {
+  public void setName(final String name) {
     this.name = name;
   }
 
@@ -42,7 +42,7 @@ public class Todo {
     return description;
   }
 
-  public void setDescription(String description) {
+  public void setDescription(final String description) {
     this.description = description;
   }
 
@@ -50,7 +50,7 @@ public class Todo {
     return status;
   }
 
-  public void setStatus(boolean status) {
+  public void setStatus(final boolean status) {
     this.status = status;
   }
 
@@ -58,7 +58,7 @@ public class Todo {
     return dueDate;
   }
 
-  public void setDueDate(LocalDateTime dueDate) {
+  public void setDueDate(final LocalDateTime dueDate) {
     this.dueDate = dueDate;
   }
 

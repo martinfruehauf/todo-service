@@ -15,7 +15,7 @@ import java.util.List;
 @Produces(MediaType.APPLICATION_JSON)
 public class TodoResource {
   @Inject
-  TodoService todoService;
+  private TodoService todoService;
 
   public TodoResource(final TodoService todoService) {
     this.todoService = todoService;
