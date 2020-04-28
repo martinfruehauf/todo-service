@@ -3,57 +3,61 @@ package domain;
 import java.time.LocalDateTime;
 
 public class Todo {
-    private long id;
-    private String name;
-    private String description;
-    private boolean status;
-    private LocalDateTime dueDate;
+  private long id;
 
-    public Todo(final long id, final String name, final String description, final boolean status, final LocalDateTime dueDate) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.status = status;
-        this.dueDate = dueDate;
-    }
+  private String name;
 
-    public long getId() {
-        return id;
-    }
+  private String description;
 
-    public void setId(long id) {
-        this.id = id;
-    }
+  private boolean status;
 
-    public String getName() {
-        return name;
-    }
+  private LocalDateTime dueDate;
 
-    public void setName(String name) {
-        this.name = name;
-    }
+  public Todo(final long id, final String name, final String description, final boolean status, final LocalDateTime dueDate) {
+    this.id = id;
+    this.name = name;
+    this.description = description;
+    this.status = status;
+    this.dueDate = dueDate;
+  }
 
-    public String getDescription() {
-        return description;
-    }
+  public long getId() {
+    return id;
+  }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+  public void setId(long id) {
+    this.id = id;
+  }
 
-    public boolean isStatus() {
-        return status;
-    }
+  public String getName() {
+    return name;
+  }
 
-    public void setStatus(boolean status) {
-        this.status = status;
-    }
+  public void setName(String name) {
+    this.name = name;
+  }
 
-    public LocalDateTime getDueDate() {
-        return dueDate;
-    }
+  public String getDescription() {
+    return description;
+  }
 
-    public void setDueDate(LocalDateTime dueDate) {
-        this.dueDate = dueDate;
-    }
+  public void setDescription(String description) {
+    this.description = description;
+  }
+
+  public boolean isStatus() {
+    return status;
+  }
+
+  public void setStatus(boolean status) {
+    this.status = status;
+  }
+
+  public LocalDateTime getDueDate() {
+    return dueDate;
+  }
+
+  public void setDueDate(LocalDateTime dueDate) {
+    this.dueDate = dueDate;
+  }
 }

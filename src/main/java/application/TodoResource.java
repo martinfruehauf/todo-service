@@ -1,6 +1,7 @@
 package application;
 
 import domain.Name;
+import domain.Todo;
 import domain.TodoService;
 
 import javax.inject.Inject;
@@ -16,9 +17,17 @@ import java.util.List;
 public class TodoResource {
   @Inject
   TodoService todoService;
+
   @GET
+  @Path("/names")
   public Response getNames() {
     List<Name> list = todoService.listNames();
+    return Response.ok().entity(list).build();
+  }
+
+  @GET
+  public Response getTodos() {
+    List<Todo> list = todoService.listTodo();
     return Response.ok().entity(list).build();
   }
 
