@@ -17,6 +17,9 @@ public class TodoResource {
   @Inject
   private TodoService todoService;
 
+  public TodoResource() {
+  }
+
   public TodoResource(final TodoService todoService) {
     this.todoService = todoService;
   }

@@ -1,5 +1,9 @@
 package domain;
 
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.ArrayList;
@@ -8,9 +12,10 @@ import java.util.List;
 public class TodoService {
 
   private List<Todo> todoList;
+  private static final Logger LOG = LoggerFactory.getLogger(TodoService.class);
 
   public TodoService() {
-    System.out.println("TodoService injiziert");
+    LOG.info("TodoService injiziert");
   }
 
   public List<Todo> listTodo() {
