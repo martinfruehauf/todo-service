@@ -14,6 +14,10 @@ public class Todo {
 
   private LocalDateTime dueDate;
 
+  public Todo(){
+
+  }
+
   public Todo(final long id, final String name, final String description, final boolean status, final LocalDateTime dueDate) {
     this.id = id;
     this.name = name;
