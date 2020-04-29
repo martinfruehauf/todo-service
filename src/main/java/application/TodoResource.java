@@ -6,8 +6,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
-import javax.json.Json;
-import javax.json.JsonObject;
 import javax.validation.constraints.NotNull;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -54,10 +52,11 @@ public class TodoResource {
   }
 
   @POST
+  @Produces(MediaType.TEXT_PLAIN)
   public Response addTodo(BaseTodoDTO baseTodoDTO) {
     LOG.info("Create new todo");
     Todo todo = todoService.addTodo(baseTodoDTO);
-    JsonObject jsonResponse = Json.createObjectBuilder().add("uri", "/api/todos/" + todo.getId()).build();
-    return Response.status(Response.Status.CREATED).entity(jsonResponse).build();
+    String stringResponse = "/api/todos/" + todo.getId();
+    return Response.status(Response.Status.CREATED).entity(stringResponse).build();
   }
 }
