@@ -13,6 +13,9 @@ public class BaseTodoDTO {
 
   private LocalDateTime dueDate;
 
+  public BaseTodoDTO() {
+  }
+
   public BaseTodoDTO(final String name, final String description, final boolean status, final LocalDateTime dueDate) {
     this.name = name;
     this.description = description;
