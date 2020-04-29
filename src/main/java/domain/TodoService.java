@@ -38,7 +38,7 @@ public class TodoService {
   }
 
   public Todo addTodo(BaseTodoDTO baseTodoDTO){
-    Todo todo = new Todo(todoList.size(), baseTodoDTO.getName(), baseTodoDTO.getDescription(), baseTodoDTO.isStatus(), baseTodoDTO.getDueDate());
+    Todo todo = new Todo(todoList.get(todoList.size()-1).getId()+1, baseTodoDTO.getName(), baseTodoDTO.getDescription(), baseTodoDTO.isStatus(), baseTodoDTO.getDueDate());
     todoList.add(todo);
     return todo;
   }
