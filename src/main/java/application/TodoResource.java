@@ -35,7 +35,7 @@ public class TodoResource {
   @GET
   @Path("/{todoNo}")
   @Produces(MediaType.APPLICATION_JSON)
-  public Response getTodoById(@PathParam("todoNo") int todoNo){
+  public Response getTodoByNo(@PathParam("todoNo") int todoNo){
     List<Todo> list = todoService.listTodo();
     return Response.ok().entity(list.get(todoNo)).build();
   }
