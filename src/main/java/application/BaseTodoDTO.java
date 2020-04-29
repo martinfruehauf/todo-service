@@ -1,10 +1,9 @@
-package domain;
+package application;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-public class Todo {
-  private long id;
+public class BaseTodoDTO {
 
   private String name;
 
@@ -14,24 +13,14 @@ public class Todo {
 
   private LocalDateTime dueDate;
 
-  public Todo(){
-
+  public BaseTodoDTO() {
   }
 
-  public Todo(final long id, final String name, final String description, final boolean status, final LocalDateTime dueDate) {
-    this.id = id;
+  public BaseTodoDTO(final String name, final String description, final boolean status, final LocalDateTime dueDate) {
     this.name = name;
     this.description = description;
     this.status = status;
     this.dueDate = dueDate;
-  }
-
-  public long getId() {
-    return id;
-  }
-
-  public void setId(final long id) {
-    this.id = id;
   }
 
   public String getName() {
@@ -68,25 +57,18 @@ public class Todo {
 
   @Override
   public String toString() {
-    return "Todo{" +
-            "id=" + id +
-            ", name='" + name + '\'' +
-            ", description='" + description + '\'' +
-            ", status=" + status +
-            ", dueDate=" + dueDate +
-            '}';
+    return "BaseTodoDTO{" + "name='" + name + '\'' + ", description='" + description + '\'' + ", status=" + status + ", dueDate=" + dueDate
+        + '}';
   }
 
   @Override
   public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-    Todo todo = (Todo) o;
-    return id == todo.id &&
-            status == todo.status &&
-            Objects.equals(name, todo.name) &&
-            Objects.equals(description, todo.description) &&
-            Objects.equals(dueDate, todo.dueDate);
+    if (this == o)
+      return true;
+    if (o == null || getClass() != o.getClass())
+      return false;
+    BaseTodoDTO that = (BaseTodoDTO)o;
+    return status == that.status && Objects.equals(name, that.name) && Objects.equals(description, that.description)
+        && Objects.equals(dueDate, that.dueDate);
   }
-
 }

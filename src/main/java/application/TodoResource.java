@@ -7,7 +7,9 @@ import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
 import javax.validation.constraints.NotNull;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -17,8 +19,10 @@ import java.util.List;
 
 @Path("/todos")
 @Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
 public class TodoResource {
   private static final Logger LOG = LoggerFactory.getLogger(TodoResource.class);
+
   @Inject
   private TodoService todoService;
 
@@ -37,7 +41,6 @@ public class TodoResource {
 
   @GET
   @Path("/{todoId}")
-  @Produces(MediaType.APPLICATION_JSON)
   public Response getTodoById(@PathParam("todoId") @NotNull int todoId) {
     try {
       LOG.info("Find todo by id: {}", todoId);
@@ -46,5 +49,14 @@ public class TodoResource {
       LOG.warn("Could not find todo by id: {}", todoId);
       return Response.status(Response.Status.NOT_FOUND).build();
     }
+  }
+
+  @POST
+  @Produces(MediaType.TEXT_PLAIN)
+  public Response addTodo(BaseTodoDTO baseTodoDTO) {
+    LOG.info("Create new todo");
+    Todo todo = todoService.addTodo(baseTodoDTO);
+    String stringResponse = "/api/todos/" + todo.getId();
+    return Response.status(Response.Status.CREATED).entity(stringResponse).build();
   }
 }

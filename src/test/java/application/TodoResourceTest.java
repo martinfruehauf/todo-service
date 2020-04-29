@@ -46,4 +46,10 @@ public class TodoResourceTest {
     Response response = this.todoResource.getTodoById(100);
     assertEquals(404, response.getStatus());
   }
+
+  @Test
+  public void testAddTodo(){
+    Response response = this.todoResource.addTodo(new BaseTodoDTO("name", "description", true, LocalDateTime.now()));
+    assertEquals(201, response.getStatus());
+  }
 }
