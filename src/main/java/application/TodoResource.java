@@ -7,10 +7,7 @@ import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
 import javax.validation.constraints.NotNull;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
@@ -47,4 +44,19 @@ public class TodoResource {
       return Response.status(Response.Status.NOT_FOUND).build();
     }
   }
+
+  @POST
+  @Consumes(MediaType.APPLICATION_JSON)
+  @Produces(MediaType.APPLICATION_JSON)
+  public Response addTodo(Todo todo){
+    try{
+      LOG.info("Create new todo");
+      todoService.addTodo(todo);
+      return Response.status(Response.Status.CREATED).build();
+    }catch(Exception e){
+      LOG.info("Failed to create new todo");
+      return Response.status(Response.Status.BAD_REQUEST).build();
+    }
+  }
+
 }
