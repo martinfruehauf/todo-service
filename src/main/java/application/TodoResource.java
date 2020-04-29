@@ -38,11 +38,11 @@ public class TodoResource {
   @GET
   @Path("/{todoId}")
   @Produces(MediaType.APPLICATION_JSON)
-  public Response getTodoByNo(@PathParam("todoId") @NotNull int todoId) {
+  public Response getTodoById(@PathParam("todoId") @NotNull int todoId) {
     try {
       LOG.info("Find todo by id: {}", todoId);
       return Response.ok().entity(todoService.getTodoById(todoId)).build();
-    } catch (IndexOutOfBoundsException e) {
+    } catch (IllegalArgumentException e) {
       LOG.warn("Could not find todo by id: {}", todoId);
       return Response.status(Response.Status.NOT_FOUND).build();
     }
