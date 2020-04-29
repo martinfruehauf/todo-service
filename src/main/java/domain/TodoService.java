@@ -1,6 +1,7 @@
 package domain;
 
 
+import application.BaseTodoDTO;
 import infrastructure.stereotypes.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,8 +37,9 @@ public class TodoService {
     throw new IllegalArgumentException("Could not find todo with id: " + todoId);
   }
 
-  public void addTodo(Todo todo){
+  public Todo addTodo(BaseTodoDTO baseTodoDTO){
+    Todo todo = new Todo(todoList.size(), baseTodoDTO.getName(), baseTodoDTO.getDescription(), baseTodoDTO.isStatus(), baseTodoDTO.getDueDate());
     todoList.add(todo);
+    return todo;
   }
-
 }
