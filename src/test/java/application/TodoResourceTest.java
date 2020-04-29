@@ -36,10 +36,14 @@ public class TodoResourceTest {
   @Test
   public void testGetTodoById(){
     Todo expected = new Todo(1, "Bla", "Do the bla", true, LocalDateTime.of(2020, Month.JANUARY, 10, 7, 30));
-    Response todo = this.todoResource.getTodoByNo(0);
+    Response todo = this.todoResource.getTodoById(1);
 
     assertEquals(expected, todo.getEntity());
   }
 
-
+  @Test
+  public void testGetTodoByIdShouldFailForWrongId(){
+    Response response = this.todoResource.getTodoById(100);
+    assertEquals(404, response.getStatus());
+  }
 }
