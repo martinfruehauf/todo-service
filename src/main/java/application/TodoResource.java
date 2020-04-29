@@ -54,9 +54,9 @@ public class TodoResource {
   }
 
   @POST
-  public Response addTodo(Todo todo) {
+  public Response addTodo(BaseTodoDTO baseTodoDTO) {
     LOG.info("Create new todo");
-    todoService.addTodo(todo);
+    Todo todo = todoService.addTodo(baseTodoDTO);
     JsonObject jsonResponse = Json.createObjectBuilder().add("uri", "/api/todos/" + todo.getId()).build();
     return Response.status(Response.Status.CREATED).entity(jsonResponse).build();
   }
