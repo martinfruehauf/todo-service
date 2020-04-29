@@ -18,7 +18,6 @@ public class TodoResource {
   @Inject
   private TodoService todoService;
 
-
   public TodoResource() {
   }
 
