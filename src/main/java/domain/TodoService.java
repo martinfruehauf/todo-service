@@ -36,4 +36,8 @@ public class TodoService {
     throw new IllegalArgumentException("Could not find todo with id: " + todoId);
   }
 
+  public void addTodo(Todo todo){
+    todoList.add(todo);
+  }
+
 }
