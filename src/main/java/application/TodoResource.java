@@ -4,6 +4,7 @@ import domain.Todo;
 import domain.TodoService;
 
 import javax.inject.Inject;
+import javax.validation.constraints.NotNull;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -34,7 +35,7 @@ public class TodoResource {
   @GET
   @Path("/{todoNo}")
   @Produces(MediaType.APPLICATION_JSON)
-  public Response getTodoByNo(@PathParam("todoNo") int todoNo){
+  public Response getTodoByNo(@PathParam("todoNo") @NotNull int todoNo){
     List<Todo> list = todoService.listTodo();
     return Response.ok().entity(list.get(todoNo)).build();
   }
