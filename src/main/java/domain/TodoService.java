@@ -28,7 +28,12 @@ public class TodoService {
   }
 
   public Todo getTodoById(int todoId){
-    return todoList.get(todoId);
+    for (Todo todo : todoList) {
+      if (todo.getId() == todoId) {
+        return todo;
+      }
+    }
+    throw new IllegalArgumentException("Could not find todo with id: " + todoId);
   }
 
 }
