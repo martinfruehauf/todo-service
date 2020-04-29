@@ -2,6 +2,8 @@ package application;
 
 import domain.Todo;
 import domain.TodoService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
 import javax.validation.constraints.NotNull;
@@ -16,6 +18,7 @@ import java.util.List;
 @Path("/todos")
 @Produces(MediaType.APPLICATION_JSON)
 public class TodoResource {
+  private static final Logger LOG = LoggerFactory.getLogger(TodoResource.class);
   @Inject
   private TodoService todoService;
 
@@ -33,11 +36,15 @@ public class TodoResource {
   }
 
   @GET
-  @Path("/{todoNo}")
+  @Path("/{todoId}")
   @Produces(MediaType.APPLICATION_JSON)
-  public Response getTodoByNo(@PathParam("todoNo") @NotNull int todoNo){
-    List<Todo> list = todoService.listTodo();
-    return Response.ok().entity(list.get(todoNo)).build();
+  public Response getTodoByNo(@PathParam("todoId") @NotNull int todoId) {
+    try {
+      LOG.info("Find todo by id: {}", todoId);
+      return Response.ok().entity(todoService.getTodoById(todoId)).build();
+    } catch (IndexOutOfBoundsException e) {
+      LOG.warn("Could not find todo by id: {}", todoId);
+      return Response.status(Response.Status.NOT_FOUND).build();
+    }
   }
-
 }

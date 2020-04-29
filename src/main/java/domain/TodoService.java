@@ -1,6 +1,7 @@
 package domain;
 
 
+import infrastructure.stereotypes.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -9,6 +10,7 @@ import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class TodoService {
 
   private List<Todo> todoList;
@@ -23,6 +25,10 @@ public class TodoService {
 
   public List<Todo> listTodo() {
     return todoList;
+  }
+
+  public Todo getTodoById(int todoId){
+    return todoList.get(todoId);
   }
 
 }
