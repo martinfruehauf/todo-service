@@ -58,5 +58,4 @@ public class TodoResource {
       return Response.status(Response.Status.BAD_REQUEST).build();
     }
   }
-
 }
