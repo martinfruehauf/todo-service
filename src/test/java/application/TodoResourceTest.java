@@ -52,4 +52,16 @@ public class TodoResourceTest {
     Response response = this.todoResource.addTodo(new BaseTodoDTO("name", "description", true, LocalDateTime.now()));
     assertEquals(201, response.getStatus());
   }
+
+  @Test
+  public void testUpdateTodo(){
+    Response response = this.todoResource.updateTodo(1, new BaseTodoDTO("new name", "new description", false, LocalDateTime.now()));
+    assertEquals(204, response.getStatus());
+  }
+
+  @Test
+  public void testUpdateTodoShouldFailForWrongId(){
+    Response response = this.todoResource.updateTodo(100, new BaseTodoDTO("new name", "new description", false, LocalDateTime.now()));
+    assertEquals(404, response.getStatus());
+  }
 }
