@@ -1,6 +1,5 @@
 package application;
 
-import domain.Todo;
 import domain.TodoService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -23,19 +22,19 @@ public class TodoResourceTest {
 
   @Test
   public void testGetTodos() {
-    ArrayList<Todo> want = new ArrayList<>();
+    ArrayList<FullTodoDTO> expected = new ArrayList<>();
 
-    want.add(new Todo(1, "Bla", "Do the bla", true, LocalDateTime.of(2020, Month.JANUARY, 10, 7, 30)));
-    want.add(new Todo(2, "Blubb", "Do the blubb", false, LocalDateTime.of(2020, Month.FEBRUARY, 20, 10, 00)));
+    expected.add(new FullTodoDTO(1, "Bla", "Do the bla", true, LocalDateTime.of(2020, Month.JANUARY, 10, 7, 30)));
+    expected.add(new FullTodoDTO(2, "Blubb", "Do the blubb", false, LocalDateTime.of(2020, Month.FEBRUARY, 20, 10, 00)));
 
     Response todos = this.todoResource.getTodos();
 
-    assertEquals(want, todos.getEntity());
+    assertEquals(expected, todos.getEntity());
   }
 
   @Test
   public void testGetTodoById() {
-    Todo expected = new Todo(1, "Bla", "Do the bla", true, LocalDateTime.of(2020, Month.JANUARY, 10, 7, 30));
+    FullTodoDTO expected = new FullTodoDTO(1, "Bla", "Do the bla", true, LocalDateTime.of(2020, Month.JANUARY, 10, 7, 30));
     Response todo = this.todoResource.getTodoById(1);
 
     assertEquals(expected, todo.getEntity());
