@@ -51,4 +51,8 @@ public class TodoService {
     todo.setStatus(baseTodoDTO.isStatus());
     todo.setDueDate(baseTodoDTO.getDueDate());
   }
+
+  public void deleteTodo(int todoId) {
+    todoList.remove(getTodoById(todoId));
+  }
 }
