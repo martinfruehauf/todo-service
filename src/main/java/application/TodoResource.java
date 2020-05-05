@@ -39,7 +39,7 @@ public class TodoResource {
   @GET
   public Response getTodos() {
     List<FullTodoDTO> listFullTodoDTO = new ArrayList<>();
-    for (Todo todo: todoService.listTodo()){
+    for (Todo todo: todoService.listTodo()) {
       listFullTodoDTO.add(new FullTodoDTO(todo));
     }
     return Response.ok().entity(listFullTodoDTO).build();
