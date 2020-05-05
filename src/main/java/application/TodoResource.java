@@ -66,7 +66,7 @@ public class TodoResource {
   public Response updateTodo(@PathParam("todoId") @NotNull int todoId, BaseTodoDTO baseTodoDTO) {
     try {
       LOG.info("Update todo by id: {}", todoId);
-      // hier der service
+      todoService.updateTodo(todoId, baseTodoDTO);
       return Response.status(Response.Status.NO_CONTENT).build();
     } catch (Exception e) { /// genauer
       LOG.info("Update todo by id: {} not possible", todoId);
