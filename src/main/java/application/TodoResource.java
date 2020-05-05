@@ -17,6 +17,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.ArrayList;
 import java.util.List;
 
 @Path("/todos")
@@ -37,8 +38,11 @@ public class TodoResource {
 
   @GET
   public Response getTodos() {
-    List<Todo> list = todoService.listTodo();
-    return Response.ok().entity(list).build();
+    List<FullTodoDTO> listFullTodoDTO = new ArrayList<>();
+    for (Todo todo: todoService.listTodo()){
+      listFullTodoDTO.add(new FullTodoDTO(todo.getId(), todo.getName(), todo.getDescription(), todo.isStatus(), todo.getDueDate()));
+    }
+    return Response.ok().entity(listFullTodoDTO).build();
   }
 
   @GET
@@ -46,7 +50,9 @@ public class TodoResource {
   public Response getTodoById(@PathParam("todoId") @NotNull int todoId) {
     try {
       LOG.info("Find todo by id: {}", todoId);
-      return Response.ok().entity(todoService.getTodoById(todoId)).build();
+      Todo todo = todoService.getTodoById(todoId);
+      FullTodoDTO fullTodoDTO = new FullTodoDTO(todo.getId(), todo.getName(), todo.getDescription(), todo.isStatus(), todo.getDueDate());
+      return Response.ok().entity(fullTodoDTO).build();
     } catch (IllegalArgumentException e) {
       LOG.warn("Could not find todo by id: {}", todoId);
       return Response.status(Response.Status.NOT_FOUND).build();
