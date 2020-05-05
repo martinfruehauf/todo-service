@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import javax.inject.Inject;
 import javax.validation.constraints.NotNull;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -70,6 +71,19 @@ public class TodoResource {
       return Response.status(Response.Status.NO_CONTENT).build();
     } catch (IllegalArgumentException e) {
       LOG.info("Update todo by id: {} not possible", todoId);
+      return Response.status(Response.Status.NOT_FOUND).build();
+    }
+  }
+
+  @DELETE
+  @Path("/{todoId}")
+  public Response deleteTodo(@PathParam("todoId") @NotNull int todoId) {
+    try {
+      LOG.info("Delete todo by id: {}", todoId);
+      todoService.deleteTodo(todoId);
+      return Response.status(Response.Status.NO_CONTENT).build();
+    } catch (IllegalArgumentException e) {
+      LOG.info("Delete todo by id: {} not possible", todoId);
       return Response.status(Response.Status.NOT_FOUND).build();
     }
   }
