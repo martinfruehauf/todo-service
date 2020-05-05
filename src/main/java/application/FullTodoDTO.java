@@ -27,6 +27,14 @@ public class FullTodoDTO {
         this.dueDate = todo.getDueDate();
     }
 
+    public FullTodoDTO(final long id, final String name, final String description, final boolean status, final LocalDateTime dueDate) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.status = status;
+        this.dueDate = dueDate;
+    }
+
     public long getId() {
         return id;
     }
