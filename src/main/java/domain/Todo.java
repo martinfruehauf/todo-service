@@ -84,7 +84,7 @@ public class Todo {
       return false;
     Todo todo = (Todo)o;
     return id == todo.id && status == todo.status && Objects.equals(name, todo.name) && Objects.equals(description, todo.description)
-        && Objects.equals(dueDate, todo.dueDate);
+            && Objects.equals(dueDate, todo.dueDate);
   }
 
 }

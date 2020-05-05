@@ -64,4 +64,16 @@ public class TodoResourceTest {
     Response response = this.todoResource.updateTodo(100, new BaseTodoDTO("new name", "new description", false, LocalDateTime.now()));
     assertEquals(404, response.getStatus());
   }
+
+  @Test
+  public void testDeleteTodo() {
+    Response response = this.todoResource.deleteTodo(1);
+    assertEquals(204, response.getStatus());
+  }
+
+  @Test
+  public void testDeleteTodoShouldFailForWrongId() {
+    Response response = this.todoResource.deleteTodo(100);
+    assertEquals(404, response.getStatus());
+  }
 }
