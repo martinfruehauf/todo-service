@@ -1,5 +1,7 @@
 package application;
 
+import domain.Todo;
+
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -17,12 +19,12 @@ public class FullTodoDTO {
     public FullTodoDTO(){
     }
 
-    public FullTodoDTO(final long id, final String name, final String description, final boolean status, final LocalDateTime dueDate) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.status = status;
-        this.dueDate = dueDate;
+    public FullTodoDTO(Todo todo) {
+        this.id = todo.getId();
+        this.name = todo.getName();
+        this.description = todo.getDescription();
+        this.status = todo.isStatus();
+        this.dueDate = todo.getDueDate();
     }
 
     public long getId() {
