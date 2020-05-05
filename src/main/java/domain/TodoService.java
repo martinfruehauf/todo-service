@@ -5,6 +5,7 @@ import infrastructure.stereotypes.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.inject.Inject;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.ArrayList;
@@ -12,6 +13,8 @@ import java.util.List;
 
 @Service
 public class TodoService {
+  @Inject
+  private TodoRepository todoRepository;
 
   private List<Todo> todoList;
 
@@ -29,12 +32,12 @@ public class TodoService {
   }
 
   public Todo getTodoById(int todoId) {
-    for (Todo todo: todoList) {
-      if (todo.getId() == todoId) {
-        return todo;
-      }
+    Todo todo = todoRepository.findById(todoId);
+    if(todo==null){
+      throw new IllegalArgumentException("Could not find todo with id: " + todoId);
     }
-    throw new IllegalArgumentException("Could not find todo with id: " + todoId);
+    return todo;
+
   }
 
   public Todo addTodo(BaseTodoDTO baseTodoDTO) {

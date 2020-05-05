@@ -1,9 +1,13 @@
 package domain;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+@Entity
 public class Todo {
+  @Id
   private long id;
 
   private String name;
