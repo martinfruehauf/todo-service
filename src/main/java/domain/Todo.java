@@ -14,7 +14,7 @@ public class Todo {
 
   private LocalDateTime dueDate;
 
-  public Todo(){
+  public Todo() {
 
   }
 
@@ -73,20 +73,18 @@ public class Todo {
             ", name='" + name + '\'' +
             ", description='" + description + '\'' +
             ", status=" + status +
-            ", dueDate=" + dueDate +
-            '}';
+            ", dueDate=" + dueDate + '}';
   }
 
   @Override
   public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-    Todo todo = (Todo) o;
-    return id == todo.id &&
-            status == todo.status &&
-            Objects.equals(name, todo.name) &&
-            Objects.equals(description, todo.description) &&
-            Objects.equals(dueDate, todo.dueDate);
+    if (this == o)
+      return true;
+    if (o == null || getClass() != o.getClass())
+      return false;
+    Todo todo = (Todo)o;
+    return id == todo.id && status == todo.status && Objects.equals(name, todo.name) && Objects.equals(description, todo.description)
+        && Objects.equals(dueDate, todo.dueDate);
   }
 
 }

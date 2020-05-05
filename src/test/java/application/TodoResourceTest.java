@@ -34,7 +34,7 @@ public class TodoResourceTest {
   }
 
   @Test
-  public void testGetTodoById(){
+  public void testGetTodoById() {
     Todo expected = new Todo(1, "Bla", "Do the bla", true, LocalDateTime.of(2020, Month.JANUARY, 10, 7, 30));
     Response todo = this.todoResource.getTodoById(1);
 
@@ -42,14 +42,26 @@ public class TodoResourceTest {
   }
 
   @Test
-  public void testGetTodoByIdShouldFailForWrongId(){
+  public void testGetTodoByIdShouldFailForWrongId() {
     Response response = this.todoResource.getTodoById(100);
     assertEquals(404, response.getStatus());
   }
 
   @Test
-  public void testAddTodo(){
+  public void testAddTodo() {
     Response response = this.todoResource.addTodo(new BaseTodoDTO("name", "description", true, LocalDateTime.now()));
     assertEquals(201, response.getStatus());
+  }
+
+  @Test
+  public void testUpdateTodo() {
+    Response response = this.todoResource.updateTodo(1, new BaseTodoDTO("new name", "new description", false, LocalDateTime.now()));
+    assertEquals(204, response.getStatus());
+  }
+
+  @Test
+  public void testUpdateTodoShouldFailForWrongId() {
+    Response response = this.todoResource.updateTodo(100, new BaseTodoDTO("new name", "new description", false, LocalDateTime.now()));
+    assertEquals(404, response.getStatus());
   }
 }

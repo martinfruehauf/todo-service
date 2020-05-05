@@ -1,6 +1,5 @@
 package domain;
 
-
 import application.BaseTodoDTO;
 import infrastructure.stereotypes.Service;
 import org.slf4j.Logger;
@@ -15,6 +14,7 @@ import java.util.List;
 public class TodoService {
 
   private List<Todo> todoList;
+
   private static final Logger LOG = LoggerFactory.getLogger(TodoService.class);
 
   public TodoService() {
@@ -28,8 +28,8 @@ public class TodoService {
     return todoList;
   }
 
-  public Todo getTodoById(int todoId){
-    for (Todo todo : todoList) {
+  public Todo getTodoById(int todoId) {
+    for (Todo todo: todoList) {
       if (todo.getId() == todoId) {
         return todo;
       }
@@ -37,9 +37,18 @@ public class TodoService {
     throw new IllegalArgumentException("Could not find todo with id: " + todoId);
   }
 
-  public Todo addTodo(BaseTodoDTO baseTodoDTO){
-    Todo todo = new Todo(todoList.get(todoList.size()-1).getId()+1, baseTodoDTO.getName(), baseTodoDTO.getDescription(), baseTodoDTO.isStatus(), baseTodoDTO.getDueDate());
+  public Todo addTodo(BaseTodoDTO baseTodoDTO) {
+    Todo todo = new Todo(todoList.get(todoList.size() - 1).getId() + 1, baseTodoDTO.getName(), baseTodoDTO.getDescription(),
+        baseTodoDTO.isStatus(), baseTodoDTO.getDueDate());
     todoList.add(todo);
     return todo;
+  }
+
+  public void updateTodo(int todoId, BaseTodoDTO baseTodoDTO) {
+    Todo todo = getTodoById(todoId);
+    todo.setName(baseTodoDTO.getName());
+    todo.setDescription(baseTodoDTO.getDescription());
+    todo.setStatus(baseTodoDTO.isStatus());
+    todo.setDueDate(baseTodoDTO.getDueDate());
   }
 }

@@ -10,6 +10,7 @@ import javax.validation.constraints.NotNull;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -58,5 +59,18 @@ public class TodoResource {
     Todo todo = todoService.addTodo(baseTodoDTO);
     String stringResponse = "/api/todos/" + todo.getId();
     return Response.status(Response.Status.CREATED).entity(stringResponse).build();
+  }
+
+  @PUT
+  @Path("/{todoId}")
+  public Response updateTodo(@PathParam("todoId") @NotNull int todoId, BaseTodoDTO baseTodoDTO) {
+    try {
+      LOG.info("Update todo by id: {}", todoId);
+      todoService.updateTodo(todoId, baseTodoDTO);
+      return Response.status(Response.Status.NO_CONTENT).build();
+    } catch (IllegalArgumentException e) {
+      LOG.info("Update todo by id: {} not possible", todoId);
+      return Response.status(Response.Status.NOT_FOUND).build();
+    }
   }
 }
