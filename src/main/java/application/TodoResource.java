@@ -68,7 +68,7 @@ public class TodoResource {
       LOG.info("Update todo by id: {}", todoId);
       todoService.updateTodo(todoId, baseTodoDTO);
       return Response.status(Response.Status.NO_CONTENT).build();
-    } catch (Exception e) { /// genauer
+    } catch (IllegalArgumentException e) {
       LOG.info("Update todo by id: {} not possible", todoId);
       return Response.status(Response.Status.NOT_FOUND).build();
     }
