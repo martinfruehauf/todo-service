@@ -9,7 +9,7 @@
             <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
             <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
             <property name="show_sql" value="true"/>
-            <!--   <property name="javax.persistence.sql-load-script-source" value="import.h2.sql"/>-->
+            <property name="javax.persistence.sql-load-script-source" value="import.sql"/>
         </properties>
     </persistence-unit>
 </persistence>
