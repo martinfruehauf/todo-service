@@ -40,7 +40,7 @@ public class TodoResource {
   public Response getTodos() {
     List<FullTodoDTO> listFullTodoDTO = new ArrayList<>();
     for (Todo todo: todoService.listTodo()){
-      listFullTodoDTO.add(new FullTodoDTO(todo.getId(), todo.getName(), todo.getDescription(), todo.isStatus(), todo.getDueDate()));
+      listFullTodoDTO.add(new FullTodoDTO(todo));
     }
     return Response.ok().entity(listFullTodoDTO).build();
   }
@@ -51,7 +51,7 @@ public class TodoResource {
     try {
       LOG.info("Find todo by id: {}", todoId);
       Todo todo = todoService.getTodoById(todoId);
-      FullTodoDTO fullTodoDTO = new FullTodoDTO(todo.getId(), todo.getName(), todo.getDescription(), todo.isStatus(), todo.getDueDate());
+      FullTodoDTO fullTodoDTO = new FullTodoDTO(todo);
       return Response.ok().entity(fullTodoDTO).build();
     } catch (IllegalArgumentException e) {
       LOG.warn("Could not find todo by id: {}", todoId);
