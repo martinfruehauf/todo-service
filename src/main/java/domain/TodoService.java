@@ -31,13 +31,12 @@ public class TodoService {
     return todoList;
   }
 
-  public Todo getTodoById(int todoId) {
+  public Todo getTodoById(long todoId) {
     Todo todo = todoRepository.findById(todoId);
     if(todo==null){
       throw new IllegalArgumentException("Could not find todo with id: " + todoId);
     }
     return todo;
-
   }
 
   public Todo addTodo(BaseTodoDTO baseTodoDTO) {
