@@ -1,7 +1,5 @@
 package application;
 
-import domain.Todo;
-
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -19,7 +17,7 @@ public class FullTodoDTO {
     public FullTodoDTO(){
     }
 
-    public FullTodoDTO(Todo todo) {
+    public FullTodoDTO(domain.Todo todo) {
         this.id = todo.getId();
         this.name = todo.getName();
         this.description = todo.getDescription();

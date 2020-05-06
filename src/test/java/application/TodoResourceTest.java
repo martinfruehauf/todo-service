@@ -1,8 +1,13 @@
 package application;
 
+import domain.Todo;
 import domain.TodoService;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import javax.ws.rs.core.Response;
 import java.time.LocalDateTime;
@@ -11,14 +16,14 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@ExtendWith(MockitoExtension.class)
 public class TodoResourceTest {
 
-  private TodoResource todoResource;
+  @InjectMocks
+  private TodoResource resource;
 
-  @BeforeEach
-  public void setUp() {
-    this.todoResource = new TodoResource(new TodoService());
-  }
+  @Mock
+  private TodoService service;
 
   @Test
   public void testGetTodos() {
@@ -27,52 +32,84 @@ public class TodoResourceTest {
     expected.add(new FullTodoDTO(1, "Bla", "Do the bla", true, LocalDateTime.of(2020, Month.JANUARY, 10, 7, 30)));
     expected.add(new FullTodoDTO(2, "Blubb", "Do the blubb", false, LocalDateTime.of(2020, Month.FEBRUARY, 20, 10, 00)));
 
-    Response todos = this.todoResource.getTodos();
+    ArrayList<Todo> mock = new ArrayList<>();
 
-    assertEquals(expected, todos.getEntity());
+    mock.add(new Todo(1, "Bla", "Do the bla", true, LocalDateTime.of(2020, Month.JANUARY, 10, 7, 30)));
+    mock.add(new Todo(2, "Blubb", "Do the blubb", false, LocalDateTime.of(2020, Month.FEBRUARY, 20, 10, 00)));
+
+    Mockito.doReturn(mock)
+            .when(service)
+            .listTodo();
+    Response response = this.resource.getTodos();
+
+    assertEquals(expected, response.getEntity());
   }
 
   @Test
   public void testGetTodoById() {
+    Mockito.doReturn(new domain.Todo(1, "Bla", "Do the bla", true, LocalDateTime.of(2020, Month.JANUARY, 10, 7, 30)))
+    .when(service)
+    .getTodoById(1);
     FullTodoDTO expected = new FullTodoDTO(1, "Bla", "Do the bla", true, LocalDateTime.of(2020, Month.JANUARY, 10, 7, 30));
-    Response todo = this.todoResource.getTodoById(1);
 
-    assertEquals(expected, todo.getEntity());
+    Response response = this.resource.getTodoById(1);
+
+    assertEquals(expected, response.getEntity());
   }
 
   @Test
   public void testGetTodoByIdShouldFailForWrongId() {
-    Response response = this.todoResource.getTodoById(100);
+    Mockito.doThrow(new IllegalArgumentException())
+            .when(service)
+            .getTodoById(100);
+
+    Response response = this.resource.getTodoById(100);
     assertEquals(404, response.getStatus());
   }
 
   @Test
   public void testAddTodo() {
-    Response response = this.todoResource.addTodo(new BaseTodoDTO("name", "description", true, LocalDateTime.now()));
+    Mockito.doReturn(new Todo(1, "name", "description", true, LocalDateTime.MIN))
+            .when(service)
+            .addTodo(new BaseTodoDTO("name", "description", true, LocalDateTime.MIN));
+    Response response = this.resource.addTodo(new BaseTodoDTO("name", "description", true, LocalDateTime.MIN));
     assertEquals(201, response.getStatus());
+    assertEquals("/api/todos/1", response.getEntity());
   }
 
   @Test
   public void testUpdateTodo() {
-    Response response = this.todoResource.updateTodo(1, new BaseTodoDTO("new name", "new description", false, LocalDateTime.now()));
+    Mockito.doNothing()
+            .when(service)
+            .updateTodo(1, new BaseTodoDTO("new name", "new description", false, LocalDateTime.MIN));
+    Response response = this.resource.updateTodo(1, new BaseTodoDTO("new name", "new description", false, LocalDateTime.MIN));
     assertEquals(204, response.getStatus());
   }
 
   @Test
   public void testUpdateTodoShouldFailForWrongId() {
-    Response response = this.todoResource.updateTodo(100, new BaseTodoDTO("new name", "new description", false, LocalDateTime.now()));
+    Mockito.doThrow(new IllegalArgumentException())
+            .when(service)
+            .updateTodo(100, new BaseTodoDTO("new name", "new description", false, LocalDateTime.MIN));
+    Response response = this.resource.updateTodo(100, new BaseTodoDTO("new name", "new description", false, LocalDateTime.MIN));
     assertEquals(404, response.getStatus());
   }
 
   @Test
   public void testDeleteTodo() {
-    Response response = this.todoResource.deleteTodo(1);
+    Mockito.doNothing()
+            .when(service)
+            .deleteTodo(1);
+    Response response = this.resource.deleteTodo(1);
     assertEquals(204, response.getStatus());
   }
 
   @Test
   public void testDeleteTodoShouldFailForWrongId() {
-    Response response = this.todoResource.deleteTodo(100);
+    Mockito.doThrow(new IllegalArgumentException())
+            .when(service)
+            .deleteTodo(100);
+    Response response = this.resource.deleteTodo(100);
     assertEquals(404, response.getStatus());
   }
 }

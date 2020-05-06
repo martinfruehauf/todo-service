@@ -1,6 +1,5 @@
 package application;
 
-import domain.Todo;
 import domain.TodoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,7 +38,7 @@ public class TodoResource {
   @GET
   public Response getTodos() {
     List<FullTodoDTO> listFullTodoDTO = new ArrayList<>();
-    for (Todo todo: todoService.listTodo()) {
+    for (domain.Todo todo: todoService.listTodo()) {
       listFullTodoDTO.add(new FullTodoDTO(todo));
     }
     return Response.ok().entity(listFullTodoDTO).build();
@@ -50,7 +49,7 @@ public class TodoResource {
   public Response getTodoById(@PathParam("todoId") @NotNull int todoId) {
     try {
       LOG.info("Find todo by id: {}", todoId);
-      Todo todo = todoService.getTodoById(todoId);
+      domain.Todo todo = todoService.getTodoById(todoId);
       FullTodoDTO fullTodoDTO = new FullTodoDTO(todo);
       return Response.ok().entity(fullTodoDTO).build();
     } catch (IllegalArgumentException e) {
@@ -63,7 +62,7 @@ public class TodoResource {
   @Produces(MediaType.TEXT_PLAIN)
   public Response addTodo(BaseTodoDTO baseTodoDTO) {
     LOG.info("Create new todo");
-    Todo todo = todoService.addTodo(baseTodoDTO);
+    domain.Todo todo = todoService.addTodo(baseTodoDTO);
     String stringResponse = "/api/todos/" + todo.getId();
     return Response.status(Response.Status.CREATED).entity(stringResponse).build();
   }
