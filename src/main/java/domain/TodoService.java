@@ -33,7 +33,7 @@ public class TodoService {
 
   public Todo getTodoById(long todoId) {
     Todo todo = todoRepository.findById(todoId);
-    if(todo==null){
+    if (todo == null) {
       throw new IllegalArgumentException("Could not find todo with id: " + todoId);
     }
     return todo;
