@@ -47,7 +47,7 @@ public class TodoResourceTest {
 
   @Test
   public void testGetTodoById() {
-    Mockito.doReturn(new domain.Todo(1, "Bla", "Do the bla", true, LocalDateTime.of(2020, Month.JANUARY, 10, 7, 30)))
+    Mockito.doReturn(new Todo(1, "Bla", "Do the bla", true, LocalDateTime.of(2020, Month.JANUARY, 10, 7, 30)))
     .when(service)
     .getTodoById(1);
     FullTodoDTO expected = new FullTodoDTO(1, "Bla", "Do the bla", true, LocalDateTime.of(2020, Month.JANUARY, 10, 7, 30));
