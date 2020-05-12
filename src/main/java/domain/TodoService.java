@@ -60,6 +60,6 @@ public class TodoService {
   }
 
   public void deleteTodo(int todoId) {
-    todoList.remove(getTodoById(todoId));
+    todoRepository.deleteTodo(todoId);
   }
 }

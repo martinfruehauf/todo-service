@@ -20,4 +20,10 @@ public class TodoRepository {
         em.persist(todo);
         return todo.getId();
     }
+
+    @Transactional
+    public void deleteTodo(final long todoId) {
+        Todo todo = em.find(Todo.class, todoId);
+        em.remove(todo);
+    }
 }
