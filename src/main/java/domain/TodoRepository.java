@@ -18,7 +18,6 @@ public class TodoRepository {
     @Transactional
     public long addTodo(final Todo todo){
         em.persist(todo);
-        em.flush();
         return todo.getId();
     }
 }
