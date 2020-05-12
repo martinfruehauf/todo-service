@@ -30,6 +30,7 @@ public class TodoResource {
   private TodoService todoService;
 
   public TodoResource() {
+    LOG.info("Todo Resource created");
   }
 
   public TodoResource(final TodoService todoService) {
@@ -63,9 +64,9 @@ public class TodoResource {
   @Produces(MediaType.TEXT_PLAIN)
   public Response addTodo(BaseTodoDTO baseTodoDTO) {
     LOG.info("Create new todo");
-    Todo todo = todoService.addTodo(baseTodoDTO);
-    String stringResponse = "/api/todos/" + todo.getId();
-    return Response.status(Response.Status.CREATED).entity(stringResponse).build();
+    long todoId = todoService.addTodo(baseTodoDTO);
+    String uri = "/api/todos/" + todoId;
+    return Response.status(Response.Status.CREATED).entity(uri).build();
   }
 
   @PUT

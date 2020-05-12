@@ -1,17 +1,20 @@
 package domain;
 
+import application.BaseTodoDTO;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity
 @Table(name = "TAB_TODO")
-public class Todo {
+public class Todo implements Serializable {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "COL_ID")
@@ -39,6 +42,13 @@ public class Todo {
     this.description = description;
     this.status = status;
     this.dueDate = dueDate;
+  }
+
+  public Todo(final BaseTodoDTO baseTodoDTO) {
+    this.name = baseTodoDTO.getName();
+    this.description = baseTodoDTO.getDescription();
+    this.status = baseTodoDTO.isStatus();
+    this.dueDate = baseTodoDTO.getDueDate();
   }
 
   public long getId() {

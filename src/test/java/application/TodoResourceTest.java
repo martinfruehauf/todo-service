@@ -69,12 +69,12 @@ public class TodoResourceTest {
 
   @Test
   public void testAddTodo() {
-    Mockito.doReturn(new Todo(1, "name", "description", true, LocalDateTime.MIN))
+    Mockito.doReturn(4L)
             .when(service)
             .addTodo(new BaseTodoDTO("name", "description", true, LocalDateTime.MIN));
     Response response = this.resource.addTodo(new BaseTodoDTO("name", "description", true, LocalDateTime.MIN));
     assertEquals(201, response.getStatus());
-    assertEquals("/api/todos/1", response.getEntity());
+    assertEquals("/api/todos/4", response.getEntity());
   }
 
   @Test
