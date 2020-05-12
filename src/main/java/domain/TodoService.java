@@ -52,11 +52,8 @@ public class TodoService {
   }
 
   public void updateTodo(final long todoId, final BaseTodoDTO baseTodoDTO) {
-    Todo todo = getTodoById(todoId);
-    todo.setName(baseTodoDTO.getName());
-    todo.setDescription(baseTodoDTO.getDescription());
-    todo.setStatus(baseTodoDTO.isStatus());
-    todo.setDueDate(baseTodoDTO.getDueDate());
+    getTodoById(todoId);
+    todoRepository.updateTodo(new Todo(todoId, baseTodoDTO));
   }
 
   public void deleteTodo(final long todoId) {

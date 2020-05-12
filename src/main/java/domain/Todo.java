@@ -51,6 +51,14 @@ public class Todo implements Serializable {
     this.dueDate = baseTodoDTO.getDueDate();
   }
 
+  public Todo(final long todoId, final BaseTodoDTO baseTodoDTO) {
+    this.id = todoId;
+    this.name = baseTodoDTO.getName();
+    this.description = baseTodoDTO.getDescription();
+    this.status = baseTodoDTO.isStatus();
+    this.dueDate = baseTodoDTO.getDueDate();
+  }
+
   public long getId() {
     return id;
   }

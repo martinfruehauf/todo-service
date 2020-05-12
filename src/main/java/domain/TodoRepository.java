@@ -4,7 +4,6 @@ import infrastructure.stereotypes.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.transaction.Transactional;
 
 @Repository
 public class TodoRepository {
@@ -15,15 +14,21 @@ public class TodoRepository {
         return em.find(Todo.class, todoId);
     }
 
-    @Transactional
+
     public long addTodo(final Todo todo){
         em.persist(todo);
         return todo.getId();
     }
 
-    @Transactional
+
     public void deleteTodo(final long todoId) {
         Todo todo = em.find(Todo.class, todoId);
         em.remove(todo);
     }
+
+
+    public void updateTodo(final Todo todo) {
+        em.merge(todo);
+    }
+
 }

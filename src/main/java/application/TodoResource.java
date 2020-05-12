@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 import javax.validation.constraints.NotNull;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -62,6 +63,7 @@ public class TodoResource {
 
   @POST
   @Produces(MediaType.TEXT_PLAIN)
+  @Transactional
   public Response addTodo(final BaseTodoDTO baseTodoDTO) {
     LOG.info("Create new todo");
     long todoId = todoService.addTodo(baseTodoDTO);
@@ -71,26 +73,28 @@ public class TodoResource {
 
   @PUT
   @Path("/{todoId}")
+  @Transactional
   public Response updateTodo(@PathParam("todoId") @NotNull final long todoId, final BaseTodoDTO baseTodoDTO) {
     try {
       LOG.info("Update todo by id: {}", todoId);
       todoService.updateTodo(todoId, baseTodoDTO);
       return Response.status(Response.Status.NO_CONTENT).build();
     } catch (IllegalArgumentException e) {
-      LOG.info("Update todo by id: {} not possible", todoId);
+      LOG.warn("Update todo by id: {} not possible", todoId);
       return Response.status(Response.Status.NOT_FOUND).build();
     }
   }
 
   @DELETE
   @Path("/{todoId}")
+  @Transactional
   public Response deleteTodo(@PathParam("todoId") @NotNull final long todoId) {
     try {
       LOG.info("Delete todo by id: {}", todoId);
       todoService.deleteTodo(todoId);
       return Response.status(Response.Status.NO_CONTENT).build();
     } catch (IllegalArgumentException e) {
-      LOG.info("Delete todo by id: {} not possible", todoId);
+      LOG.warn("Delete todo by id: {} not possible", todoId);
       return Response.status(Response.Status.NOT_FOUND).build();
     }
   }
