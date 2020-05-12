@@ -46,11 +46,9 @@ public class TodoService {
     return todo;
   }
 
-  public Todo addTodo(BaseTodoDTO baseTodoDTO) {
-    Todo todo = new Todo(todoList.get(todoList.size() - 1).getId() + 1, baseTodoDTO.getName(), baseTodoDTO.getDescription(),
-        baseTodoDTO.isStatus(), baseTodoDTO.getDueDate());
-    todoList.add(todo);
-    return todo;
+  public long addTodo(BaseTodoDTO baseTodoDTO) {
+    Todo todo = new Todo(baseTodoDTO);
+    return todoRepository.addTodo(todo);
   }
 
   public void updateTodo(int todoId, BaseTodoDTO baseTodoDTO) {

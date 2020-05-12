@@ -1,6 +1,5 @@
 package domain;
 
-import application.BaseTodoDTO;
 import infrastructure.stereotypes.Repository;
 
 import javax.persistence.EntityManager;
@@ -17,8 +16,9 @@ public class TodoRepository {
     }
 
     @Transactional
-    public void addTodo(final BaseTodoDTO baseTodoDTO){
-        em.persist(baseTodoDTO);
+    public long addTodo(final Todo todo){
+        em.persist(todo);
         em.flush();
+        return todo.getId();
     }
 }
