@@ -48,7 +48,7 @@ public class TodoResource {
 
   @GET
   @Path("/{todoId}")
-  public Response getTodoById(@PathParam("todoId") @NotNull int todoId) {
+  public Response getTodoById(@PathParam("todoId") @NotNull final long todoId) {
     try {
       LOG.info("Find todo by id: {}", todoId);
       Todo todo = todoService.getTodoById(todoId);
@@ -62,7 +62,7 @@ public class TodoResource {
 
   @POST
   @Produces(MediaType.TEXT_PLAIN)
-  public Response addTodo(BaseTodoDTO baseTodoDTO) {
+  public Response addTodo(final BaseTodoDTO baseTodoDTO) {
     LOG.info("Create new todo");
     long todoId = todoService.addTodo(baseTodoDTO);
     String uri = "/api/todos/" + todoId;
@@ -71,7 +71,7 @@ public class TodoResource {
 
   @PUT
   @Path("/{todoId}")
-  public Response updateTodo(@PathParam("todoId") @NotNull int todoId, BaseTodoDTO baseTodoDTO) {
+  public Response updateTodo(@PathParam("todoId") @NotNull final long todoId, final BaseTodoDTO baseTodoDTO) {
     try {
       LOG.info("Update todo by id: {}", todoId);
       todoService.updateTodo(todoId, baseTodoDTO);
@@ -84,7 +84,7 @@ public class TodoResource {
 
   @DELETE
   @Path("/{todoId}")
-  public Response deleteTodo(@PathParam("todoId") @NotNull int todoId) {
+  public Response deleteTodo(@PathParam("todoId") @NotNull final long todoId) {
     try {
       LOG.info("Delete todo by id: {}", todoId);
       todoService.deleteTodo(todoId);
