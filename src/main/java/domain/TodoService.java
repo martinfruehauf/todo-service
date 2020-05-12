@@ -38,7 +38,7 @@ public class TodoService {
     return todoList;
   }
 
-  public Todo getTodoById(long todoId) {
+  public Todo getTodoById(final long todoId) {
     Todo todo = todoRepository.findById(todoId);
     if (todo == null) {
       throw new IllegalArgumentException("Could not find todo with id: " + todoId);
@@ -46,12 +46,12 @@ public class TodoService {
     return todo;
   }
 
-  public long addTodo(BaseTodoDTO baseTodoDTO) {
+  public long addTodo(final BaseTodoDTO baseTodoDTO) {
     Todo todo = new Todo(baseTodoDTO);
     return todoRepository.addTodo(todo);
   }
 
-  public void updateTodo(int todoId, BaseTodoDTO baseTodoDTO) {
+  public void updateTodo(final long todoId, final BaseTodoDTO baseTodoDTO) {
     Todo todo = getTodoById(todoId);
     todo.setName(baseTodoDTO.getName());
     todo.setDescription(baseTodoDTO.getDescription());
@@ -59,7 +59,7 @@ public class TodoService {
     todo.setDueDate(baseTodoDTO.getDueDate());
   }
 
-  public void deleteTodo(int todoId) {
-    todoList.remove(getTodoById(todoId));
+  public void deleteTodo(final long todoId) {
+    todoRepository.deleteTodo(todoId);
   }
 }
