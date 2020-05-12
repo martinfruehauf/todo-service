@@ -1,6 +1,5 @@
 package domain;
 
-import application.BaseTodoDTO;
 import infrastructure.stereotypes.Repository;
 
 import javax.persistence.EntityManager;
@@ -29,12 +28,8 @@ public class TodoRepository {
     }
 
     @Transactional
-    public void updateTodo(final long todoId, final BaseTodoDTO baseTodoDTO) {
-        Todo todo = em.find(Todo.class, todoId);
-        todo.setName(baseTodoDTO.getName());
-        todo.setDescription(baseTodoDTO.getDescription());
-        todo.setStatus(baseTodoDTO.isStatus());
-        todo.setDueDate(baseTodoDTO.getDueDate());
+    public void updateTodo(final Todo todo) {
+        em.merge(todo);
     }
 
 }

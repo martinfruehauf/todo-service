@@ -52,7 +52,8 @@ public class TodoService {
   }
 
   public void updateTodo(final long todoId, final BaseTodoDTO baseTodoDTO) {
-    todoRepository.updateTodo(todoId, baseTodoDTO);
+    getTodoById(todoId);
+    todoRepository.updateTodo(new Todo(todoId, baseTodoDTO));
   }
 
   public void deleteTodo(final long todoId) {

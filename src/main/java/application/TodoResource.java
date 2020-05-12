@@ -77,7 +77,7 @@ public class TodoResource {
       todoService.updateTodo(todoId, baseTodoDTO);
       return Response.status(Response.Status.NO_CONTENT).build();
     } catch (IllegalArgumentException e) {
-      LOG.info("Update todo by id: {} not possible", todoId);
+      LOG.warn("Update todo by id: {} not possible", todoId);
       return Response.status(Response.Status.NOT_FOUND).build();
     }
   }
@@ -90,7 +90,7 @@ public class TodoResource {
       todoService.deleteTodo(todoId);
       return Response.status(Response.Status.NO_CONTENT).build();
     } catch (IllegalArgumentException e) {
-      LOG.info("Delete todo by id: {} not possible", todoId);
+      LOG.warn("Delete todo by id: {} not possible", todoId);
       return Response.status(Response.Status.NOT_FOUND).build();
     }
   }
