@@ -30,7 +30,7 @@ public class TodoResource {
   private TodoService todoService;
 
   public TodoResource() {
-    LOG.info("Todo Source created");
+    LOG.info("Todo Resource created");
   }
 
   public TodoResource(final TodoService todoService) {
