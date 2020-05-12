@@ -65,8 +65,8 @@ public class TodoResource {
   public Response addTodo(BaseTodoDTO baseTodoDTO) {
     LOG.info("Create new todo");
     long todoId = todoService.addTodo(baseTodoDTO);
-    String stringResponse = "/api/todos/" + todoId;
-    return Response.status(Response.Status.CREATED).entity(stringResponse).build();
+    String uri = "/api/todos/" + todoId;
+    return Response.status(Response.Status.CREATED).entity(uri).build();
   }
 
   @PUT
