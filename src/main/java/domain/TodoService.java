@@ -35,7 +35,7 @@ public class TodoService {
   }
 
   public List<Todo> listTodo() {
-    return todoList;
+    return todoRepository.getTodos();
   }
 
   public Todo getTodoById(final long todoId) {
