@@ -51,7 +51,7 @@ public class TodoResource {
 
   @GET
   @Path("/{todoId}")
-  public Response getTodoById(@PathParam("todoId") @Valid @NotNull final long todoId) {
+  public Response getTodoById(@PathParam("todoId") final long todoId) {
     try {
       LOG.info("Get todo by id: {}", todoId);
       Todo todo = todoService.getTodoById(todoId);
@@ -76,7 +76,7 @@ public class TodoResource {
   @PUT
   @Path("/{todoId}")
   @Transactional
-  public Response updateTodo(@PathParam("todoId") @Valid @NotNull final long todoId, @Valid @NotNull final BaseTodoDTO baseTodoDTO) {
+  public Response updateTodo(@PathParam("todoId") final long todoId, @Valid @NotNull final BaseTodoDTO baseTodoDTO) {
     try {
       LOG.info("Update todo by id: {}", todoId);
       todoService.updateTodo(todoId, baseTodoDTO);
@@ -90,7 +90,7 @@ public class TodoResource {
   @DELETE
   @Path("/{todoId}")
   @Transactional
-  public Response deleteTodo(@PathParam("todoId") @Valid @NotNull final long todoId) {
+  public Response deleteTodo(@PathParam("todoId") final long todoId) {
     try {
       LOG.info("Delete todo by id: {}", todoId);
       todoService.deleteTodo(todoId);
