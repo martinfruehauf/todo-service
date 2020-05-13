@@ -54,7 +54,7 @@ public class TodoResourceIT {
         .contentType(MediaType.APPLICATION_JSON)
         .body(new BaseTodoDTO("new name", "new description", false, LocalDateTime.MIN))
         .when()
-        .post("http://localhost:8080/todo-service-1.0-SNAPSHOT/api/todos/")
+        .post("http://localhost:8080/todo-service-1.0-SNAPSHOT/api/todos")
         .then()
         .statusCode(201)
         .body(Matchers.equalTo("/api/todos/4"));
