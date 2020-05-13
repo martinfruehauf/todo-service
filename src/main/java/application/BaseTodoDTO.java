@@ -1,5 +1,8 @@
 package application;
 
+import infrastructure.adapters.LocalDateTimeAdapter;
+
+import javax.json.bind.annotation.JsonbTypeAdapter;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -11,6 +14,7 @@ public class BaseTodoDTO {
 
   private boolean status;
 
+  @JsonbTypeAdapter(LocalDateTimeAdapter.class)
   private LocalDateTime dueDate;
 
   public BaseTodoDTO() {
