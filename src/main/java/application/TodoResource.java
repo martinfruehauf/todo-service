@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
 import javax.transaction.Transactional;
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -50,7 +51,7 @@ public class TodoResource {
 
   @GET
   @Path("/{todoId}")
-  public Response getTodoById(@PathParam("todoId") @NotNull final long todoId) {
+  public Response getTodoById(@PathParam("todoId") @Valid @NotNull final long todoId) {
     try {
       LOG.info("Get todo by id: {}", todoId);
       Todo todo = todoService.getTodoById(todoId);
@@ -65,7 +66,7 @@ public class TodoResource {
   @POST
   @Produces(MediaType.TEXT_PLAIN)
   @Transactional
-  public Response addTodo(final BaseTodoDTO baseTodoDTO) {
+  public Response addTodo(@Valid @NotNull final BaseTodoDTO baseTodoDTO) {
     LOG.info("Create new todo");
     long todoId = todoService.addTodo(baseTodoDTO);
     String uri = "/api/todos/" + todoId;
@@ -75,7 +76,7 @@ public class TodoResource {
   @PUT
   @Path("/{todoId}")
   @Transactional
-  public Response updateTodo(@PathParam("todoId") @NotNull final long todoId, final BaseTodoDTO baseTodoDTO) {
+  public Response updateTodo(@PathParam("todoId") @Valid @NotNull final long todoId, @Valid @NotNull final BaseTodoDTO baseTodoDTO) {
     try {
       LOG.info("Update todo by id: {}", todoId);
       todoService.updateTodo(todoId, baseTodoDTO);
@@ -89,7 +90,7 @@ public class TodoResource {
   @DELETE
   @Path("/{todoId}")
   @Transactional
-  public Response deleteTodo(@PathParam("todoId") @NotNull final long todoId) {
+  public Response deleteTodo(@PathParam("todoId") @Valid @NotNull final long todoId) {
     try {
       LOG.info("Delete todo by id: {}", todoId);
       todoService.deleteTodo(todoId);
