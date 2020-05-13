@@ -1,6 +1,8 @@
 package domain;
 
 import infrastructure.stereotypes.Repository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -15,7 +17,10 @@ public class TodoRepository {
   @PersistenceContext(unitName = "default")
   private EntityManager em;
 
+  private static final Logger LOG = LoggerFactory.getLogger(TodoRepository.class);
+
   public List<Todo> getTodos() {
+    LOG.info("Get all todos");
     CriteriaBuilder cb = em.getCriteriaBuilder();
     CriteriaQuery<Todo> cq = cb.createQuery(Todo.class);
     Root<Todo> root = cq.from(Todo.class);
@@ -25,20 +30,24 @@ public class TodoRepository {
   }
 
   public Todo findById(final long todoId) {
+    LOG.info("Get todo by id: {}", todoId);
     return em.find(Todo.class, todoId);
   }
 
   public long addTodo(final Todo todo) {
+    LOG.info("Add todo");
     em.persist(todo);
     return todo.getId();
   }
 
   public void deleteTodo(final long todoId) {
+    LOG.info("Delete todo by id: {}", todoId);
     Todo todo = em.find(Todo.class, todoId);
     em.remove(todo);
   }
 
   public void updateTodo(final Todo todo) {
+    LOG.info("Update todo");
     em.merge(todo);
   }
 

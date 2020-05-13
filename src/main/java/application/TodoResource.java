@@ -40,6 +40,7 @@ public class TodoResource {
 
   @GET
   public Response getTodos() {
+    LOG.info("Get all todos");
     List<FullTodoDTO> listFullTodoDTO = new ArrayList<>();
     for (Todo todo: todoService.listTodo()) {
       listFullTodoDTO.add(new FullTodoDTO(todo));
@@ -51,7 +52,7 @@ public class TodoResource {
   @Path("/{todoId}")
   public Response getTodoById(@PathParam("todoId") @NotNull final long todoId) {
     try {
-      LOG.info("Find todo by id: {}", todoId);
+      LOG.info("Get todo by id: {}", todoId);
       Todo todo = todoService.getTodoById(todoId);
       FullTodoDTO fullTodoDTO = new FullTodoDTO(todo);
       return Response.ok().entity(fullTodoDTO).build();
