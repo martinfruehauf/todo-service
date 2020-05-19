@@ -10,30 +10,6 @@ public final class TodoValidationErrorPayload {
         }
     }
 
-    public static class LimitMinInvalid extends ValidationErrorPayload {
-        public LimitMinInvalid() {
-            super("LIMIT_MIN", "limit must be greater or equal to 0");
-        }
-    }
-
-    public static class LimitMaxInvalid extends ValidationErrorPayload {
-        public LimitMaxInvalid() {
-            super("LIMIT_MAX", "limit must be less or equal to 10");
-        }
-    }
-
-    public static class OffsetMinInvalid extends ValidationErrorPayload {
-        public OffsetMinInvalid() {
-            super("OFFSET_MIN", "offset must be greater or equal to 0");
-        }
-    }
-
-    public static class OffsetMaxInvalid extends ValidationErrorPayload {
-        public OffsetMaxInvalid() {
-            super("OFFSET_MAX", "offset must be less or equal to 100");
-        }
-    }
-
     public static class TitleIsInvalid extends ValidationErrorPayload {
         public TitleIsInvalid() {
             super("TITLE_NULL", "title must not be null");
