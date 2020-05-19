@@ -60,6 +60,16 @@ class TodoResourceIT {
   }
 
   @Test
+  void TodoResourceReturns400ForTheMethodAddTodo() {
+    RestAssured.given()
+            .contentType(MediaType.APPLICATION_JSON)
+            .when()
+            .post("http://localhost:8080/todo-service-1.0-SNAPSHOT/api/todos")
+            .then()
+            .statusCode(400);
+  }
+
+  @Test
   void TodoResourceReturns204ForMethodUpdateTodo() {
     RestAssured
         .given()
@@ -83,6 +93,16 @@ class TodoResourceIT {
         .put("http://localhost:8080/todo-service-1.0-SNAPSHOT/api/todos/{id}", 100)
         .then()
         .statusCode(404);
+  }
+
+  @Test
+  void TodoResourceReturns400ForMethodUpdateTodo() {
+    RestAssured.given()
+        .contentType(MediaType.APPLICATION_JSON)
+        .when()
+        .post("http://localhost:8080/todo-service-1.0-SNAPSHOT/api/todos")
+        .then()
+        .statusCode(400);
   }
 
   @Test
