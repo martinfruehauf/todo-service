@@ -72,4 +72,37 @@ class TodoResourceIT {
         .statusCode(204);
   }
 
+  @Test
+  void TodoResourceReturns404ForMethodUpdateTodo() {
+    RestAssured
+        .given()
+        .accept(MediaType.APPLICATION_JSON)
+        .contentType(MediaType.APPLICATION_JSON)
+        .body(new BaseTodoDTO("new name 2", "new description 2", false, LocalDateTime.MIN.toString()))
+        .when()
+        .put("http://localhost:8080/todo-service-1.0-SNAPSHOT/api/todos/{id}", 100)
+        .then()
+        .statusCode(404);
+  }
+
+  @Test
+  void TodoResourceReturns204ForMethodDeleteTodo() {
+    RestAssured
+        .given()
+        .when()
+        .delete("http://localhost:8080/todo-service-1.0-SNAPSHOT/api/todos/{id}", 1)
+        .then()
+        .statusCode(204);
+  }
+
+  @Test
+  void TodoResourceReturns404ForMethodDeleteTodo() {
+    RestAssured
+        .given()
+        .when()
+        .delete("http://localhost:8080/todo-service-1.0-SNAPSHOT/api/todos/{id}", 100)
+        .then()
+        .statusCode(404);
+  }
+
 }
