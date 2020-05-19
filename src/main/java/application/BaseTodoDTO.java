@@ -3,6 +3,7 @@ package application;
 import domain.TodoValidationErrorPayload;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.util.Objects;
 
@@ -18,6 +19,7 @@ public class BaseTodoDTO {
   private boolean status;
 
   @NotNull(payload = TodoValidationErrorPayload.DueDateNull.class)
+  @Pattern((\d{4})-(\d{2})-(\d{2})+"T"+(\d{2}):(\d{2}):(d\2)) // geht noch nicht
   private String dueDate;
 
   public BaseTodoDTO() {
