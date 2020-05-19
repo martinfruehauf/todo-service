@@ -10,7 +10,6 @@ public class BaseTodoDTO {
 
   private boolean status;
 
-  //@JsonbTypeAdapter(LocalDateTimeAdapter.class)
   private String dueDate;
 
   public BaseTodoDTO() {
