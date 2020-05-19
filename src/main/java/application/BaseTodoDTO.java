@@ -10,11 +10,9 @@ public class BaseTodoDTO {
   @Size(min = 1, max = 30)
   private String name;
 
-  @NotNull
   @Size(max = 500)
   private String description;
 
-  @NotNull
   private boolean status;
 
   @NotNull
