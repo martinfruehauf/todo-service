@@ -2,12 +2,14 @@ package application;
 
 import domain.Todo;
 import domain.TodoService;
+import domain.TodoValidationErrorPayload;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -51,7 +53,7 @@ public class TodoResource {
 
   @GET
   @Path("/{todoId}")
-  public Response getTodoById(@PathParam("todoId") final long todoId) {
+  public Response getTodoById(@PathParam("todoId") @Min(value = 0, payload = TodoValidationErrorPayload.NegativeTodoId.class) final long todoId) {
     try {
       LOG.info("Get todo by id: {}", todoId);
       Todo todo = todoService.getTodoById(todoId);
@@ -76,7 +78,7 @@ public class TodoResource {
   @PUT
   @Path("/{todoId}")
   @Transactional
-  public Response updateTodo(@PathParam("todoId") final long todoId, @Valid @NotNull final BaseTodoDTO baseTodoDTO) {
+  public Response updateTodo(@PathParam("todoId") @Min(value = 0, payload = TodoValidationErrorPayload.NegativeTodoId.class) final long todoId, @Valid @NotNull final BaseTodoDTO baseTodoDTO) {
     try {
       LOG.info("Update todo by id: {}", todoId);
       todoService.updateTodo(todoId, baseTodoDTO);
@@ -90,7 +92,7 @@ public class TodoResource {
   @DELETE
   @Path("/{todoId}")
   @Transactional
-  public Response deleteTodo(@PathParam("todoId") final long todoId) {
+  public Response deleteTodo(@PathParam("todoId") @Min(value = 0, payload = TodoValidationErrorPayload.NegativeTodoId.class) final long todoId) {
     try {
       LOG.info("Delete todo by id: {}", todoId);
       todoService.deleteTodo(todoId);
