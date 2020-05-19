@@ -1,15 +1,23 @@
 package application;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Objects;
 
 public class BaseTodoDTO {
 
+  @NotNull
+  @Size(min = 1, max = 30)
   private String name;
 
+  @NotNull
+  @Size(max = 500)
   private String description;
 
+  @NotNull
   private boolean status;
 
+  @NotNull
   private String dueDate;
 
   public BaseTodoDTO() {

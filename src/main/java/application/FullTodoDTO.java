@@ -2,17 +2,27 @@ package application;
 
 import domain.Todo;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Objects;
 
 public class FullTodoDTO {
+    @NotNull
+    @Size(min = 0, max = 1000000)
     private long id;
 
+    @NotNull
+    @Size(min = 1, max = 30)
     private String name;
 
+    @NotNull
+    @Size(max = 500)
     private String description;
 
+    @NotNull
     private boolean status;
 
+    @NotNull
     private String dueDate;
 
     public FullTodoDTO(){
