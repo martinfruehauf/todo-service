@@ -66,7 +66,7 @@ public class TodoResource {
   @POST
   @Produces(MediaType.TEXT_PLAIN)
   @Transactional
-  public Response addTodo(final BaseTodoDTO baseTodoDTO) { // fuer debugging valid notnull ruasgenommen
+  public Response addTodo(@Valid @NotNull final BaseTodoDTO baseTodoDTO) { // fuer debugging valid notnull ruasgenommen
     LOG.info("Create new todo");
     long todoId = todoService.addTodo(baseTodoDTO);
     String uri = "/api/todos/" + todoId;
