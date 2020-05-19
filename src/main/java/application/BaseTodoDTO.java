@@ -1,6 +1,5 @@
 package application;
 
-import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class BaseTodoDTO {
@@ -11,12 +10,12 @@ public class BaseTodoDTO {
 
   private boolean status;
 
-  private LocalDateTime dueDate;
+  private String dueDate;
 
   public BaseTodoDTO() {
   }
 
-  public BaseTodoDTO(final String name, final String description, final boolean status, final LocalDateTime dueDate) {
+  public BaseTodoDTO(final String name, final String description, final boolean status, final String dueDate) {
     this.name = name;
     this.description = description;
     this.status = status;
@@ -47,11 +46,11 @@ public class BaseTodoDTO {
     this.status = status;
   }
 
-  public LocalDateTime getDueDate() {
+  public String getDueDate() {
     return dueDate;
   }
 
-  public void setDueDate(final LocalDateTime dueDate) {
+  public void setDueDate(final String dueDate) {
     this.dueDate = dueDate;
   }
 
