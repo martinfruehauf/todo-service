@@ -34,5 +34,10 @@ public final class TodoValidationErrorPayload {
         }
     }
 
+    public static  class DueDatePattern extends ValidationErrorPayload {
+        public DueDatePattern() {
+            super("DUEDATE_PATTERN", "dueDate must be of format yyy-MM-ddTHH:mm");
+        }
+    }
 
 }
