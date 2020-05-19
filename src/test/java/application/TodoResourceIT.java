@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 
 class TodoResourceIT {
   @Test
-  void TodoResourceReturns200WithExpectedTodosForTheMethodGetTodos() {
+  void GetTodosReturns200WithExpectedTodos() {
     RestAssured
         .when()
         .get("http://localhost:8080/todo-service-1.0-SNAPSHOT/api/todos/")
@@ -24,7 +24,7 @@ class TodoResourceIT {
   }
 
   @Test
-  void TodoResourceReturns200WithExpectedTodoForTheMethodGetTodoById() {
+  void GetTodoByIdReturns200WithExpectedTodo() {
     RestAssured
         .when()
         .get("http://localhost:8080/todo-service-1.0-SNAPSHOT/api/todos/{id}", 1)
@@ -38,7 +38,7 @@ class TodoResourceIT {
   }
 
   @Test
-  void TodoResourceReturns404ForTheMethodGetTodoById() {
+  void GetTodoByIdReturns404() {
     RestAssured
         .when()
         .get("http://localhost:8080/todo-service-1.0-SNAPSHOT/api/todos/{id}", 100)
@@ -47,7 +47,7 @@ class TodoResourceIT {
   }
 
   @Test
-  void TodoResourceReturns201WithExpectedStringForTheMethodAddTodo() {
+  void AddTodoReturns201WithExpectedString() {
     RestAssured.given()
         .contentType(MediaType.APPLICATION_JSON)
         .body(new BaseTodoDTO("new name", "new description", false, LocalDateTime.MIN.toString()))
@@ -60,7 +60,7 @@ class TodoResourceIT {
   }
 
   @Test
-  void TodoResourceReturns400ForTheMethodAddTodo() {
+  void AddTodoReturns400() {
     RestAssured.given()
             .contentType(MediaType.APPLICATION_JSON)
             .when()
@@ -70,7 +70,7 @@ class TodoResourceIT {
   }
 
   @Test
-  void TodoResourceReturns204ForMethodUpdateTodo() {
+  void UpdateTodoReturns204() {
     RestAssured
         .given()
         .accept(MediaType.APPLICATION_JSON)
@@ -83,7 +83,7 @@ class TodoResourceIT {
   }
 
   @Test
-  void TodoResourceReturns404ForMethodUpdateTodo() {
+  void UpdateTodoReturns404() {
     RestAssured
         .given()
         .accept(MediaType.APPLICATION_JSON)
@@ -96,7 +96,7 @@ class TodoResourceIT {
   }
 
   @Test
-  void TodoResourceReturns400ForMethodUpdateTodo() {
+  void UpdateTodoReturns400() {
     RestAssured.given()
         .contentType(MediaType.APPLICATION_JSON)
         .when()
@@ -106,7 +106,7 @@ class TodoResourceIT {
   }
 
   @Test
-  void TodoResourceReturns204ForMethodDeleteTodo() {
+  void DeleteTodoReturns204() {
     RestAssured
         .given()
         .when()
@@ -116,7 +116,7 @@ class TodoResourceIT {
   }
 
   @Test
-  void TodoResourceReturns404ForMethodDeleteTodo() {
+  void DeleteTodoReturns404() {
     RestAssured
         .given()
         .when()
