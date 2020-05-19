@@ -13,7 +13,6 @@ public abstract class ValidationErrorPayload implements Payload {
         this.message = message;
     }
 
-
     public String getErrorCode() {
         return errorCode;
     }
