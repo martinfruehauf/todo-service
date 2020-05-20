@@ -68,7 +68,7 @@ public class TodoResource {
   @POST
   @Produces(MediaType.TEXT_PLAIN)
   @Transactional
-  public Response addTodo(@Valid @NotNull final BaseTodoDTO baseTodoDTO) {
+  public Response addTodo(@Valid @NotNull(payload =  TodoValidationErrorPayload.BaseTodoNull.class) final BaseTodoDTO baseTodoDTO) {
     LOG.info("Create new todo");
     long todoId = todoService.addTodo(baseTodoDTO);
     String uri = "/api/todos/" + todoId;
@@ -78,7 +78,7 @@ public class TodoResource {
   @PUT
   @Path("/{todoId}")
   @Transactional
-  public Response updateTodo(@PathParam("todoId") @Min(value = 0, payload = TodoValidationErrorPayload.NegativeTodoId.class) final long todoId, @Valid @NotNull final BaseTodoDTO baseTodoDTO) {
+  public Response updateTodo(@PathParam("todoId") @Min(value = 0, payload = TodoValidationErrorPayload.NegativeTodoId.class) final long todoId, @Valid @NotNull(payload =  TodoValidationErrorPayload.BaseTodoNull.class) final BaseTodoDTO baseTodoDTO) {
     try {
       LOG.info("Update todo by id: {}", todoId);
       todoService.updateTodo(todoId, baseTodoDTO);
