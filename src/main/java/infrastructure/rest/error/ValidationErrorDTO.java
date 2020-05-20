@@ -3,6 +3,7 @@ package infrastructure.rest.error;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.json.bind.JsonbBuilder;
 import javax.validation.ConstraintViolation;
 import javax.validation.Payload;
 
@@ -23,5 +24,25 @@ public class ValidationErrorDTO {
         } catch (InstantiationException | IllegalAccessException e) {
             LOG.error(e.getMessage(), e);
         }
+    }
+
+    public String getErrorCode() {
+        return errorCode;
+    }
+
+    public void setErrorCode(final String errorCode) {
+        this.errorCode = errorCode;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(final String message) {
+        this.message = message;
+    }
+
+    public String toString() {
+        return JsonbBuilder.create().toJson(this);
     }
 }

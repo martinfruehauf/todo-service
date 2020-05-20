@@ -19,7 +19,7 @@ public class ConstraintViolationExceptionMapper implements ExceptionMapper<Const
     public Response toResponse(ConstraintViolationException e) {
         LOG.warn("Request validation failed");
         List<ValidationErrorDTO> errors = e.getConstraintViolations().stream()
-                .map(ValidationErrorDTO::new)
+                .map(violation -> new ValidationErrorDTO(violation))
                 .collect(Collectors.toList());
 
         return Response.status(Response.Status.BAD_REQUEST).entity(errors).build();
