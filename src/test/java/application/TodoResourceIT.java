@@ -2,12 +2,15 @@ package application;
 
 import io.restassured.RestAssured;
 import org.hamcrest.Matchers;
+import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 
 import javax.ws.rs.core.MediaType;
 import java.time.LocalDateTime;
 
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class TodoResourceIT {
   @Test
   @Order(1)
