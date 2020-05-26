@@ -287,7 +287,6 @@ public void UpdateTodoReturns400ForNameIsNull() {
                 .then()
                 .statusCode(400)
                 .body(Matchers.equalTo("[{\"errorCode\":\"NEGATIVE_TODO_ID\",\"message\":\"todoId must be greater than or equal to 0\"}]"));
-
     }
 
 }
