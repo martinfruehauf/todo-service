@@ -4,6 +4,7 @@ import domain.Todo;
 
 import java.util.Objects;
 
+
 public class FullTodoDTO {
     private long id;
 

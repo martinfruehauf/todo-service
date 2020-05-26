@@ -3,6 +3,10 @@ package application;
 import domain.Todo;
 import domain.TodoService;
 import domain.TodoValidationErrorPayload;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -42,6 +46,14 @@ public class TodoResource {
   }
 
   @GET
+  @Operation(summary = "Get a list of todos.",
+          tags = {"Todos"},
+          description = "Return a full list of all todos in the database",
+          responses = {
+            @ApiResponse(description = "Todo list", content = @Content(
+                    schema = @Schema(implementation = FullTodoDTO.class)
+            ))
+          })
   public Response getTodos() {
     LOG.info("Get all todos");
     List<FullTodoDTO> listFullTodoDTO = new ArrayList<>();
@@ -53,6 +65,17 @@ public class TodoResource {
 
   @GET
   @Path("/{todoId}")
+  @Operation(summary = "Get Todo",
+      tags = {"Todos"},
+      description = "Request an existing todo.",
+      responses = {
+          @ApiResponse(responseCode = "200", description = "Todo found.", content = @Content(
+                  schema = @Schema(implementation = FullTodoDTO.class)
+          )),
+          @ApiResponse(responseCode = "404", description = "Todo not found.")
+      }
+
+      )
   public Response getTodoById(@PathParam("todoId") @Min(value = 0, payload = TodoValidationErrorPayload.NegativeTodoId.class) final long todoId) {
     try {
       LOG.info("Get todo by id: {}", todoId);
