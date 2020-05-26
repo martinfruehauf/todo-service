@@ -46,14 +46,9 @@ public class TodoResource {
   }
 
   @GET
-  @Operation(summary = "Get a list of todos.",
-          tags = {"Todos"},
-          description = "Return a full list of all todos in the database",
-          responses = {
-            @ApiResponse(description = "Todo list", content = @Content(
-                    schema = @Schema(implementation = FullTodoDTO.class)
-            ))
-          })
+  @Operation(summary = "List Todos", tags = {
+      "Todos" }, description = "Get a list of todos.", responses = {
+          @ApiResponse(description = "Todo list", content = @Content(schema = @Schema(implementation = FullTodoDTO.class))) })
   public Response getTodos() {
     LOG.info("Get all todos");
     List<FullTodoDTO> listFullTodoDTO = new ArrayList<>();
@@ -65,18 +60,14 @@ public class TodoResource {
 
   @GET
   @Path("/{todoId}")
-  @Operation(summary = "Get Todo",
-      tags = {"Todos"},
-      description = "Request an existing todo.",
-      responses = {
-          @ApiResponse(responseCode = "200", description = "Todo found.", content = @Content(
-                  schema = @Schema(implementation = FullTodoDTO.class)
-          )),
-          @ApiResponse(responseCode = "404", description = "Todo not found.")
-      }
+  @Operation(summary = "Get Todo", tags = { "Todos" }, description = "Request an existing todo.", responses = {
+      @ApiResponse(responseCode = "200", description = "Todo found.", content = @Content(schema = @Schema(implementation = FullTodoDTO.class))),
+      @ApiResponse(responseCode = "404", description = "Todo not found.") }
 
-      )
-  public Response getTodoById(@PathParam("todoId") @Min(value = 0, payload = TodoValidationErrorPayload.NegativeTodoId.class) final long todoId) {
+  )
+  public Response getTodoById(@PathParam("todoId")
+  @Min(value = 0, payload = TodoValidationErrorPayload.NegativeTodoId.class)
+  final long todoId) {
     try {
       LOG.info("Get todo by id: {}", todoId);
       Todo todo = todoService.getTodoById(todoId);
@@ -91,7 +82,13 @@ public class TodoResource {
   @POST
   @Produces(MediaType.TEXT_PLAIN)
   @Transactional
-  public Response addTodo(@Valid @NotNull(payload =  TodoValidationErrorPayload.BaseTodoNull.class) final BaseTodoDTO baseTodoDTO) {
+  @Operation(summary = "Create Todo", tags = {"Todos"}, description = "The new todo.", responses = {
+      @ApiResponse(responseCode = "201", description = "Todo created.", content = @Content(schema = @Schema(implementation = String.class))),
+      @ApiResponse(responseCode = "400", description = "Invalid new todo") }
+  )
+  public Response addTodo(@Valid
+  @NotNull(payload = TodoValidationErrorPayload.BaseTodoNull.class)
+  final BaseTodoDTO baseTodoDTO) {
     LOG.info("Create new todo");
     long todoId = todoService.addTodo(baseTodoDTO);
     String uri = "/api/todos/" + todoId;
@@ -101,7 +98,16 @@ public class TodoResource {
   @PUT
   @Path("/{todoId}")
   @Transactional
-  public Response updateTodo(@PathParam("todoId") @Min(value = 0, payload = TodoValidationErrorPayload.NegativeTodoId.class) final long todoId, @Valid @NotNull(payload =  TodoValidationErrorPayload.BaseTodoNull.class) final BaseTodoDTO baseTodoDTO) {
+  @Operation(summary = "Update Todo", tags = {"Todos"}, description = "Update an existing todo.", responses = {
+      @ApiResponse(responseCode = "204", description = "Todo updated."),
+      @ApiResponse(responseCode = "400", description = "Invalid modified todo."),
+      @ApiResponse(responseCode = "404", description = "Todo not found")
+  })
+  public Response updateTodo(@PathParam("todoId")
+  @Min(value = 0, payload = TodoValidationErrorPayload.NegativeTodoId.class)
+  final long todoId, @Valid
+  @NotNull(payload = TodoValidationErrorPayload.BaseTodoNull.class)
+  final BaseTodoDTO baseTodoDTO) {
     try {
       LOG.info("Update todo by id: {}", todoId);
       todoService.updateTodo(todoId, baseTodoDTO);
@@ -115,7 +121,13 @@ public class TodoResource {
   @DELETE
   @Path("/{todoId}")
   @Transactional
-  public Response deleteTodo(@PathParam("todoId") @Min(value = 0, payload = TodoValidationErrorPayload.NegativeTodoId.class) final long todoId) {
+  @Operation(summary = "Delete Todo", tags = {"Todos"}, description = "Delete an existing todo.", responses = {
+          @ApiResponse(responseCode = "204", description = "Todo deleted."),
+          @ApiResponse(responseCode = "404", description = "Todo not found")
+  })
+  public Response deleteTodo(@PathParam("todoId")
+  @Min(value = 0, payload = TodoValidationErrorPayload.NegativeTodoId.class)
+  final long todoId) {
     try {
       LOG.info("Delete todo by id: {}", todoId);
       todoService.deleteTodo(todoId);

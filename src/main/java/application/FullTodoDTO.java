@@ -1,10 +1,11 @@
 package application;
 
 import domain.Todo;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.util.Objects;
 
-
+@Schema(description = "The full todo with identifier used as response object.")
 public class FullTodoDTO {
     private long id;
 

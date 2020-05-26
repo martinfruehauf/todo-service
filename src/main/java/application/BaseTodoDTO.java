@@ -1,11 +1,13 @@
 package application;
 
 import domain.TodoValidationErrorPayload;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Objects;
 
+@Schema(description = "A base todo used for creation and modification.")
 public class BaseTodoDTO {
 
   @NotNull(payload = TodoValidationErrorPayload.TitleIsInvalid.class)
@@ -15,6 +17,7 @@ public class BaseTodoDTO {
   @Size(max = 500, payload = TodoValidationErrorPayload.DescriptionSize.class)
   private String description;
 
+  @Schema(required = true)
   private boolean status;
 
   @NotNull(payload = TodoValidationErrorPayload.DueDateNull.class)
