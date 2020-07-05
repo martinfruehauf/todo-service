@@ -31,6 +31,7 @@ public class Todo implements Serializable {
 
   @Column(name = "COL_DUE")
   private LocalDateTime dueDate;
+  //private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-ddT");
 
   public Todo() {
 
@@ -48,7 +49,7 @@ public class Todo implements Serializable {
     this.name = baseTodoDTO.getName();
     this.description = baseTodoDTO.getDescription();
     this.status = baseTodoDTO.isStatus();
-    this.dueDate = LocalDateTime.parse(baseTodoDTO.getDueDate());
+    this.dueDate = LocalDateTime.parse(baseTodoDTO.getDueDate().substring(0,19));
   }
 
   public Todo(final long todoId, final BaseTodoDTO baseTodoDTO) {
@@ -56,7 +57,8 @@ public class Todo implements Serializable {
     this.name = baseTodoDTO.getName();
     this.description = baseTodoDTO.getDescription();
     this.status = baseTodoDTO.isStatus();
-    this.dueDate = LocalDateTime.parse(baseTodoDTO.getDueDate());
+    //this.dueDate = LocalDateTime.parse(baseTodoDTO.getDueDate(), formatter);
+    this.dueDate = LocalDateTime.parse(baseTodoDTO.getDueDate().substring(0,19));
   }
 
   public long getId() {
