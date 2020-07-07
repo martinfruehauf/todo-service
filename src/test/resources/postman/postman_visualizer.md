@@ -7,7 +7,7 @@ This is just supposed to be a summary and a short introduction. For an in-depth 
 The Visualizer uses HTML, CSS and Javascript to create the visualizations.
 
 The code for the visualization can be written in either the *Pre-request Script* or the *Test*.  
-We first need to create a template. This is where most of the "magic" happens. We pretty much create an actual website with HTML, CSS and Javascript - without the `<hmtl>`, `<head>` and `<body> tags. Since we are using template literals make sure to use backticks like in the example from the Website:
+We first need to create a template. This is where most of the "magic" happens. We pretty much create an actual website with HTML, CSS and Javascript - without the `<hmtl>`, `<head>` and `<body>` tags. Since we are using template literals make sure to use backticks like in the example from the Website:
 
     var template = `
         <table bgcolor="#FFFFFF">
